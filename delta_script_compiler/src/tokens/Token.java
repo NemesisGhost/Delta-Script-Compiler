@@ -12,7 +12,7 @@ public abstract class Token
 		if(tokenStr.length() <= 0) return null;
 		
 		char ch2 = tokenStr.length() >= 2 ? tokenStr.charAt(1) : ' ';
-		if(isAlpha(ch)) return new WordToken(tokenStr);
+		if(isAlpha(ch) || isPrefix(ch)) return new WordToken(tokenStr);
 		else if(isNumeric(ch)) return new NumberToken(tokenStr);
 		else if((ch == '/' && ch2 == '*') && (ch == '-' && ch2 == '-')) return new CommentToken(tokenStr, (ch == '/'));
 		else if(ch == '\'') return new StringToken(tokenStr.substring(1));
@@ -49,8 +49,13 @@ public abstract class Token
 	
 	protected static boolean isSymbol(char ch) 
 	{
-		return (ch >= '!' && ch <= '/') || (ch >= ':' && ch <= '@') || 
-			   (ch >= '[' && ch <= '_') || (ch >= '{' && ch <= '~');
+		return ((ch >= '!' && ch <= '/') || (ch >= ':' && ch <= '@') || 
+			   (ch >= '[' && ch <= '_') || (ch >= '{' && ch <= '~'));
+	}
+	
+	protected static boolean isPrefix(char ch) 
+	{
+		return ch == '@' || ch == '#';
 	}
 	
 	protected String Gobble(String line) 

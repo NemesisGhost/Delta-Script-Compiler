@@ -10,6 +10,16 @@ public class CommentToken extends Token
 		_isMultiline = isMultiline;
 	}
 	
+	public Token gobbleMore(String tokenStr) 
+	{
+		String str;
+		if(_isMultiline && _openMultiLine > 0)
+			str = Gobble(tokenStr);
+		else
+			str = tokenStr;
+		return Token.CreateToken(str);
+	}
+	
 	public int get_OpenMultiLines() { return _openMultiLine; }
 	
 	@Override

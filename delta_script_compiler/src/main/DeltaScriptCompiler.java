@@ -1,5 +1,10 @@
 package main;
 
+import java.io.IOException;
+
+import common.LineReader;
+import tokens.TokenReader;
+
 public class DeltaScriptCompiler {
 
 	/**
@@ -15,6 +20,14 @@ public class DeltaScriptCompiler {
 			filePath = args[0];
 		}
 		
+		try {
+			LineReader reader = new LineReader(filePath);
+			TokenReader tokenReader = new TokenReader(reader);
+			tokenReader.ReadTokens();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -30,6 +30,17 @@ public abstract class Token
 		return _next;
 	}
 	
+	public void set_NextToken(Token next) 
+	{
+		_next = next;
+	}
+	
+	public Token get_LastToken() 
+	{
+		if(_next == null) return this;
+		else return _next.get_LastToken();
+	}
+	
 	public String get_Contents() { return _contents; }
 	
 	protected static boolean isAlpha(char ch) 
